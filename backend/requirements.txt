@@ -1,0 +1,6 @@
+fastapi[all]
+tensorflow-gpu
+numpy
+matplotlib
+pillow
+tensorflow-hub
