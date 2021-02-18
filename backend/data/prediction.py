@@ -8,8 +8,7 @@ import tensorflow_hub as hub
 from data.style import *
 # Load compressed models from tensorflow_hub
 os.environ['TFHUB_MODEL_LOAD_FORMAT'] = 'COMPRESSED'
-style_path = tf.keras.utils.get_file('kandinsky5.jpg','https://storage.googleapis.com/download.tensorflow.org/example_images/Vassily_Kandinsky%2C_1913_-_Composition_7.jpg')
-style_image = load_img(style_path)
+
 
 input_shape = (224,224)
 max_dim = 512
@@ -21,10 +20,13 @@ def load_model():
     model = hub.load('https://tfhub.dev/google/magenta/arbitrary-image-stylization-v1-256/2')
     return model
 
-def predict(image: np.ndarray):
+def predict(image: np.ndarray, style_path: str):
+    #print("===",style_path)
     global model
     if model is None:
         model = load_model()
+    path = 'https://storage.googleapis.com/download.tensorflow.org/example_images/Vassily_Kandinsky%2C_1913_-_Composition_7.jpg'
+    style_image = get_image(style_path)
     stylized_image = model(tf.constant(image), tf.constant(style_image))[0]
     stylized_image =  tensor_to_image(stylized_image)
     return stylized_image

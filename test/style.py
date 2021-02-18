@@ -5,7 +5,6 @@ def get_image(path):
     style_path = tf.keras.utils.get_file('test.jpg',path)
     style_image = load_img(style_path)
     return style_image
-  
 def tensor_to_image(tensor):
   tensor = tensor*255
   tensor = np.array(tensor, dtype=np.uint8)

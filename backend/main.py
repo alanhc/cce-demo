@@ -14,11 +14,11 @@ def hello_world(name: str):
 
 
 @app.post("/api/predict")
-async def predict_image(file: UploadFile = File(...)):
+async def predict_image(style_path: str,file: UploadFile = File(...)):
     image = read_image(await file.read())
 
     #image = preprocess(image)
-    styleImage = predict(image)
+    styleImage = predict(image, style_path)
     print(styleImage)
     #print(predictions)
     #styleImage.save("thumbnail.png")
